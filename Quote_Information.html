@@ -11,12 +11,28 @@
 
     <!-- Accept Form -->
     <form action="https://prod-12.centralindia.logic.azure.com:443/workflows/14e1ab1f4312400f93c0a8b67710faad/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=vnDgx0by1kTUkeLmLsoV4H9yrxk4UUanP12Rc_gYmJk" method="POST" style="display: inline;">
+        <!-- Hidden input to carry quote ID -->
+        <input type="hidden" name="quoteId" id="quoteId">
         <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Accept</button>
     </form>
 
     <!-- Reject Form -->
-    <form action="YOUR_FLOW_URL" method="POST" style="display: inline; margin-left: 10px;">
+    <form action="YOUR_REJECT_FLOW_URL" method="POST" style="display: inline; margin-left: 10px;">
         <button type="submit" style="background-color: #f44336; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Reject</button>
     </form>
+
+    <script>
+        // Function to get query parameter by name
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Set quoteId from URL into hidden input field for Accept form
+        const quoteId = getQueryParam('quoteId');
+        if (quoteId) {
+            document.getElementById('quoteId').value = quoteId;
+        }
+    </script>
 </body>
 </html>
