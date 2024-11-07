@@ -25,14 +25,28 @@
         // Function to retrieve query parameter by name
         function getQueryParam(param) {
             const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
+            let quoteId = urlParams.get(param);
+
+            // Check if quoteId contains unresolved Power Automate expression syntax
+            if (quoteId && quoteId.includes("triggerOutputs")) {
+                // Apply a fallback value or message if expression is unresolved
+                quoteId = "FALLBACK_QUOTE_ID"; // Replace with a default quote ID or handle error
+                console.log("Unresolved Power Automate expression detected. Setting fallback quoteId.");
+            }
+            
+            return quoteId;
         }
 
-        // Set the value of the hidden input field to the `quoteId` parameter from the URL
+        // Retrieve the `quoteId` parameter from the URL and set it in the hidden input field
         const quoteId = getQueryParam('quoteId');
         if (quoteId) {
             document.getElementById('quoteId').value = quoteId;
+        } else {
+            console.log("No quoteId found in URL."); // Debugging log
         }
+
+        // Optional: Log the `quoteId` value to verify it’s set correctly
+        console.log("Quote ID set in hidden input:", document.getElementById('quoteId').value);
     </script>
 </body>
 </html>
