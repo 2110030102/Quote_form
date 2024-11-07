@@ -22,13 +22,13 @@
     </form>
 
     <script>
-        // Function to get query parameter by name
+        // Function to retrieve query parameter by name
         function getQueryParam(param) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
         }
 
-        // Set quoteId from URL into hidden input field for Accept form
+        // Set the value of the hidden input field to the `quoteId` parameter from the URL
         const quoteId = getQueryParam('quoteId');
         if (quoteId) {
             document.getElementById('quoteId').value = quoteId;
